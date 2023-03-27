@@ -32,15 +32,6 @@ jobs:
         with: 
           name: dist
           path: dist
-      # - name: ftp-action
-      #   uses: sebastianpopp/ftp-action@v2.0.0
-      #   with:
-      #     host: ${{ secrets.FTP_SERVER }}
-      #     user: ${{ secrets.FTP_USERNAME }}
-      #     password: ${{ secrets.FTP_PASSWORD }}
-      #     localDir: "dist/"
-      #     remoteDir: "."
-      #     options: "--delete --asci"
       - name: Sync files to hosting
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with: 
@@ -49,3 +40,8 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: "./dist/"
           server-dir: "./../"
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            fileToExclude.txt
