@@ -35,6 +35,6 @@ jobs:
       - name: Sync files to hosting
         uses: SamKirkland/FTP-Deploy-Action@4.0.0
         with: 
-          server: ftp.learn.dbbyte.com
+          server: ftp.agoraweb.ro
           username: githubcicd@learn.dbbyte.com
           password: ${{ secrets.LEARN_PIPE }}
