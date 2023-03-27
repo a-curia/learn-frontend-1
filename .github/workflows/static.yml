@@ -31,10 +31,19 @@ jobs:
         uses: actions/download-artifact@main
         with: 
           name: dist
-          path: dist
-      - name: Sync files to hosting
-        uses: SamKirkland/FTP-Deploy-Action@4.0.0
-        with: 
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
+          path: dist/index.html
+      - name: Upload ftp
+        uses: sebastianpopp/ftp-action@releases/v2
+        with:
+          host: ${{ secrets.FTP_SERVER }}
+          user: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
+          localDir: "dist"
+          remoteDir: "home/agoraweb/learn.dbbyte.com/"
+          options: "--delete --asci"
+      # - name: Sync files to hosting
+      #   uses: SamKirkland/FTP-Deploy-Action@4.0.0
+      #   with: 
+      #     server: ${{ secrets.FTP_SERVER }}
+      #     username: ${{ secrets.FTP_USERNAME }}
+      #     password: ${{ secrets.FTP_PASSWORD }}
