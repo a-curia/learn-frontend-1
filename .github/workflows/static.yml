@@ -5,19 +5,19 @@ on:
   workflow_dispatch:
 
 jobs:
-  web-deploy:
-    name: 🎉 Deploy
+  deploy:
+    name: Deploy
     runs-on: ubuntu-latest
     steps:
-    - name: 🚚 Get latest code
-      uses: actions/checkout@v3
-    
-    - name: 📂 Sync files
-      uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+    - uses: actions/checkout@v2
+    - name: Upload ftp
+      uses: genietim/ftp-action@releases/v4
       with:
-        server: ftp.agoraweb.ro
-        username: githubcicd@learn.dbbyte.com
-        password: ${{ secrets.LEARN_PIPE }}
+        host: ${{ secrets.FTP_SERVER }}
+        user: ${{ secrets.FTP_USERNAME }}
+        password: ${{ secrets.FTP_PASSWORD }}
+        localDir: "dist"
+        remoteDir: ""
 
   # build:
   #   name: Build ⛏
